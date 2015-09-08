@@ -18,6 +18,7 @@ type Piet struct {
   from Point
   now Point
   debug bool
+  output string
 }
 
 func (p *Piet) New(filename string) error {
@@ -53,6 +54,7 @@ func (p *Piet) NewFromFile(reader *os.File) error {
   p.stack = []int64{}
   p.from = Point{0, 0}
   p.now = Point{0, 0}
+  p.output = ""
   return nil
 }
 

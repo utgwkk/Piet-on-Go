@@ -182,6 +182,7 @@ func (p *Piet) OutNumber() {
   a, ok1 := p.PopStack()
   if ok1 {
     fmt.Print(a)
+    p.output += fmt.Sprintf("%d",a)
   }
 }
 
@@ -189,5 +190,6 @@ func (p *Piet) OutChar() {
   a, ok1 := p.PopStack()
   if ok1 {
     fmt.Print(string(a))
+    p.output += string(a)
   }
 }
