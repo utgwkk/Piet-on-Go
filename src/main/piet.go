@@ -9,6 +9,7 @@ import (
 
 type Piet struct {
   codel [][]int
+  codelsize int
   CC bool
   DP int
   width int
@@ -40,15 +41,15 @@ func (p *Piet) NewFromFile(reader *os.File) error {
   bounds := m.Bounds()
 
   p.codel = make([][]int, bounds.Max.Y - bounds.Min.Y)
-  for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-    for x := bounds.Min.X; x < bounds.Max.X; x++ {
+  for y := bounds.Min.Y; y < bounds.Max.Y; y+=p.codelsize {
+    for x := bounds.Min.X; x < bounds.Max.X; x+=p.codelsize {
       r, g, b, _ := m.At(x, y).RGBA()
-      p.codel[y-bounds.Min.Y] = append(p.codel[y-bounds.Min.Y], CalculateColor(r>>8, g>>8, b>>8))
+      p.codel[(y-bounds.Min.Y)/p.codelsize] = append(p.codel[(y-bounds.Min.Y)/p.codelsize], CalculateColor(r>>8, g>>8, b>>8))
     }
   }
 
-  p.width = bounds.Max.X - bounds.Min.X
-  p.height = bounds.Max.Y - bounds.Min.Y
+  p.width = (bounds.Max.X - bounds.Min.X) / p.codelsize
+  p.height = (bounds.Max.Y - bounds.Min.Y) / p.codelsize
   p.DP = 0
   p.CC = true
   p.stack = []int64{}
