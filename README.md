@@ -3,15 +3,17 @@ A Piet interpreter written in Go
 
 ## Usage
 ```sh
-$ export GOPATH=$PWD
 $ make
-$ bin/pietongo.o -i [filename]
+$ ./pietongo -i [filename]
 ```
 If you want to use debug mode,
 ```sh
-$ bin/pietongo.o --debug -i [filename]
+$ ./pietongo --debug -i [filename]
 ```
-
+or you want to specify the pixel of codel,
+```sh
+$ ./pietongo --codel [pixel size] -i [filename]
+```
 ## NOTE
 - Additional colors will be regarded as black.
 - This program is unstable. Pull requests are welcome.

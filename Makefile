@@ -1,2 +1,2 @@
-bin/pietongo.o: src/main/*.go
-	go build -o $@ main
+pietongo: src/main/*.go
+	GOPATH=$(PWD) go build -o $@ main
