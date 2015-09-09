@@ -1,4 +1,4 @@
-package main
+package piet
 
 func any(l ...bool) bool {
   for _, b := range l {

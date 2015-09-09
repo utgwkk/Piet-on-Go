@@ -1,4 +1,4 @@
-package main
+package piet
 
 func CalculateColor(r, g, b uint32) int {
   const (

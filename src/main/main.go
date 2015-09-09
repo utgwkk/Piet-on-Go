@@ -1,6 +1,7 @@
 package main
 
 import (
+  "piet"
   "bufio"
   "fmt"
   "flag"
@@ -10,7 +11,7 @@ import (
 )
 
 func main() {
-  var pi Piet
+  var pi piet.Piet
   var fname = flag.String("i", "filename", "source code file name")
   var debug = flag.Bool("debug", false, "if true, enables debug mode")
   var codelsize= flag.Int("codel", 1, "codel size of input")
@@ -23,11 +24,14 @@ func main() {
     defer exec.Command("stty", "-F", "/dev/tty", "echo").Run()
   }
 
-  pi.debug = *debug
+  if *debug {
+    pi.EnableDebug()
+  }
+
   if *codelsize <= 0 {
-    pi.codelsize = 1
+    pi.SetCodelSize(1)
   } else {
-    pi.codelsize = *codelsize
+    pi.SetCodelSize(*codelsize)
   }
 
   reader, err := os.Open(*fname)

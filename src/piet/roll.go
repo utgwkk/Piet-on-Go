@@ -1,4 +1,4 @@
-package main
+package piet
 
 func roll(xs []int64, reverse bool) []int64 {
   if reverse {

@@ -1,4 +1,4 @@
-package main
+package piet
 
 func (p *Piet) PushStack(i int64) {
   p.stack = append([]int64{i}, p.stack...)

@@ -1,4 +1,4 @@
-package main
+package piet
 
 import (
   "image"
@@ -20,6 +20,14 @@ type Piet struct {
   now Point
   debug bool
   output string
+}
+
+func (p *Piet) SetCodelSize(size int) {
+  p.codelsize = size
+}
+
+func (p *Piet) EnableDebug() {
+  p.debug = true
 }
 
 func (p *Piet) New(reader io.Reader) error {
