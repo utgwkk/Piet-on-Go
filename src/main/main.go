@@ -23,4 +23,5 @@ func main() {
     return
   }
   pi.Run()
+  fmt.Println()
 }

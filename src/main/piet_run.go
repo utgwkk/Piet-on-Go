@@ -64,7 +64,7 @@ func (p *Piet) Step() bool {
   p.area = int64(len(sc))
 
   // determine where to go
-  for i := 0; i < 9; i++ {
+  for i := 0; i < 8; i++ {
     edge = p.GetEdge(sc)
     dest = AddPoints(edge, dr[p.DP])
     if all(p.IsMovableCodel(dest), dest != p.from){
@@ -75,7 +75,7 @@ func (p *Piet) Step() bool {
     } else {
       p.DP = (p.DP + 1) % 4
     }
-    if i == 8 {
+    if i == 7 {
       // end of the program
       return false
     }
