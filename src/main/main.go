@@ -1,10 +1,12 @@
 package main
 
 import (
+  "bufio"
   "fmt"
   "flag"
   "os"
   "os/exec"
+  "strings"
 )
 
 func main() {
@@ -27,11 +29,22 @@ func main() {
   } else {
     pi.codelsize = *codelsize
   }
-  err := pi.New(*fname)
+
+  reader, err := os.Open(*fname)
+
   if err != nil {
-    fmt.Println(err)
-    return
+    scanner := bufio.NewScanner(os.Stdin)
+    var str string = ""
+    for scanner.Scan() {
+      str += scanner.Text()
+    }
+    altreader := strings.NewReader(str)
+    pi.New(altreader)
+  } else {
+    pi.New(reader)
+    defer reader.Close()
   }
+
   pi.Run()
   fmt.Println()
 }

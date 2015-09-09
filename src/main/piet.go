@@ -1,8 +1,8 @@
 package main
 
 import (
-  "os"
   "image"
+  "io"
   _ "image/gif"
   _ "image/png"
 )
@@ -22,18 +22,7 @@ type Piet struct {
   output string
 }
 
-func (p *Piet) New(filename string) error {
-  reader, err := os.Open(filename)
-
-  if err != nil {
-    return err
-  }
-  defer reader.Close()
-
-  return p.NewFromFile(reader)
-}
-
-func (p *Piet) NewFromFile(reader *os.File) error {
+func (p *Piet) New(reader io.Reader) error {
   m, _, err := image.Decode(reader)
   if err != nil {
     return err
