@@ -11,6 +11,7 @@ func TestAll(t *testing.T) {
   for _, tc := range testlist {
     piet.New(tc[0])
     piet.debug = false
+    piet.codelsize = 1
     piet.Run()
     actual := piet.output
     expected := tc[1]

@@ -168,14 +168,17 @@ func (p *Piet) Roll() {
 func (p *Piet) InNumber() {
   scanner := bufio.NewScanner(os.Stdin)
   scanner.Scan()
-  a, _ := strconv.Atoi(scanner.Text())
+  a, err := strconv.Atoi(scanner.Text())
+  if err != nil {
+    return
+  }
   p.PushStack(int64(a))
 }
 
 func (p *Piet) InChar() {
-  scanner := bufio.NewScanner(os.Stdin)
-  scanner.Scan()
-  p.PushStack(int64(scanner.Text()[0]))
+  var b []byte = make([]byte, 1)
+  os.Stdin.Read(b)
+  p.PushStack(int64(b[0]))
 }
 
 func (p *Piet) OutNumber() {
