@@ -1,17 +1,20 @@
 package piet
 
-import "testing"
+import (
+  "testing"
+  "os"
+)
 
 func TestAll(t *testing.T) {
-  var piet Piet
   var testlist = [][2]string{
     {"../../tests/alpha_filled.png", "abcdefghijklmnopqrstuvwxyz"},
     {"../../tests/Piet-1.gif", "Piet"}}
 
   for _, tc := range testlist {
-    piet.New(tc[0])
-    piet.debug = false
-    piet.codelsize = 1
+    var piet Piet
+    reader, _ := os.Open(tc[0])
+    piet.SetCodelSize(1)
+    piet.New(reader)
     piet.Run()
     actual := piet.output
     expected := tc[1]
