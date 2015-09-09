@@ -15,7 +15,7 @@ func (p *Piet) Run() {
   var ccstat = []string{"LEFT", "RIGHT"}
   for i := 1; cont; i++ {
     if p.debug {
-      fmt.Printf("step %04d : %s ; DP=%s, CC=%s\n", i, p.now.ToString(), dpstat[p.DP], ccstat[BoolToInt64(!p.CC)])
+      fmt.Printf("step %04d : %s ; COLOR=%s, DP=%s, CC=%s\n", i, p.now.ToString(), colorname[p.GetCodel(p.now)], dpstat[p.DP], ccstat[BoolToInt64(!p.CC)])
     }
     cont = p.Step()
     if p.debug { fmt.Println(p.stack) }
@@ -32,6 +32,14 @@ var commandsstr = [][3]string{
   {"Greater", "Pointer", "Switch"},
   {"Duplicate", "Roll", "InNumber"},
   {"InChar", "OutNumber", "OutChar"}}
+
+var colorname = []string{"LightRed", "Red", "DarkRed",
+  "LightYellow", "Yellow", "DarkYellow",
+  "LightGreen", "Green", "DarkGreen",
+  "LightCyan", "Cyan", "DarkCyan",
+  "LightBlue", "Blue", "DarkBlue",
+  "LightMagenta", "Magenta", "DarkMagenta",
+  "White", "Black"}
 
 func (p *Piet) Step() bool {
   var commands = [][3]func(){
