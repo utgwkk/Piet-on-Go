@@ -13,27 +13,50 @@ func (p Point) Equal(q Point) bool { return p.x == q.x && p.y == q.y }
 
 func (p Point) ToString() string { return fmt.Sprintf("(%d, %d)", p.x, p.y) }
 
-func Lesser(p, q Point, b bool) bool {
+func Lesser(p, q Point, b, reverse bool) bool {
   if b { // compare x
-    return p.x < q.x
+    if reverse {
+      return p.x >= q.x
+    } else {
+      return p.x < q.x
+    }
   } else {
-    return p.y < q.y
+    if reverse {
+      return p.y >= q.y
+    } else {
+      return p.y < q.y
+    }
   }
 }
-
+/*
 func SortPointSlice(ps []Point, target, reverse bool) []Point {
-  for i := 0; i < len(ps); i++ {
-    for j := 1; j < len(ps)-i; j++ {
-      if reverse {
-        if Lesser(ps[j-1], ps[j], target) {
-          ps[j], ps[j-1] = ps[j-1], ps[j]
-        }
-      } else {
-        if Lesser(ps[j], ps[j-1], target) {
-          ps[j], ps[j-1] = ps[j-1], ps[j]
-        }
+  for i := 1; i < len(ps); i++ {
+    tmp := ps[i]
+    if Lesser(tmp, ps[i-1], target, reverse) {
+      ps[i] = ps[i-1]
+      var j int
+      for j = i-1; j > 0 && Lesser(tmp, ps[j-1], target, reverse); j-- {
+        ps[j] = ps[j-1]
       }
+      ps[j] = tmp
     }
   }
   return ps
+}*/
+
+func SortPointSlice(ps []Point, target, reverse bool) []Point {
+  if len(ps) <= 1 {
+    return ps
+  }
+  var left = []Point{}
+  var right = []Point{}
+  x := ps[0]
+  for _, d := range ps[1:] {
+    if Lesser(d, x, target, reverse) {
+      left = append(left, d)
+    } else {
+      right = append(right, d)
+    }
+  }
+  return append(SortPointSlice(left, target, reverse), append([]Point{x}, SortPointSlice(right, target, reverse)...)...)
 }
