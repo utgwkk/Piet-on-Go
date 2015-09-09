@@ -28,21 +28,6 @@ func Lesser(p, q Point, b, reverse bool) bool {
     }
   }
 }
-/*
-func SortPointSlice(ps []Point, target, reverse bool) []Point {
-  for i := 1; i < len(ps); i++ {
-    tmp := ps[i]
-    if Lesser(tmp, ps[i-1], target, reverse) {
-      ps[i] = ps[i-1]
-      var j int
-      for j = i-1; j > 0 && Lesser(tmp, ps[j-1], target, reverse); j-- {
-        ps[j] = ps[j-1]
-      }
-      ps[j] = tmp
-    }
-  }
-  return ps
-}*/
 
 func SortPointSlice(ps []Point, target, reverse bool) []Point {
   if len(ps) <= 1 {
