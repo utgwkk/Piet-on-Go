@@ -46,8 +46,6 @@ func (p *Piet) Step() bool {
     {p.Duplicate, p.Roll, p.InNumber},
     {p.InChar, p.OutNumber, p.OutChar}}
 
-  var sc = []Point{}
-  p.CalculateArea(&sc, p.GetCodel(p.now), p.now)
   var edge, dest Point
   if p.GetCodel(p.now) == white {
     edge = p.now
@@ -61,6 +59,8 @@ func (p *Piet) Step() bool {
       return true
     }
   }
+  var sc = []Point{}
+  p.CalculateArea(&sc, p.GetCodel(p.now), p.now)
   p.area = int64(len(sc))
 
   // determine where to go
