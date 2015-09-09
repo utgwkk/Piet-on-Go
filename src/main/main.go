@@ -12,7 +12,11 @@ func main() {
   var codelsize= flag.Int("codel", 1, "codel size of input")
   flag.Parse()
   pi.debug = *debug
-  pi.codelsize = *codelsize
+  if *codelsize <= 0 {
+    pi.codelsize = 1
+  } else {
+    pi.codelsize = *codelsize
+  }
   err := pi.New(*fname)
   if err != nil {
     fmt.Println(err)
