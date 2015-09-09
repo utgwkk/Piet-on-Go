@@ -3,6 +3,7 @@ package piet
 import (
   "bufio"
   "fmt"
+  "math"
   "os"
   "strconv"
 )
@@ -56,10 +57,18 @@ func (p *Piet) Mod() {
   a, ok1 := p.PopStack()
   b, ok2 := p.PopStack()
   if ok1 && ok2 {
+    sgn := a < 0
     if a == 0 {
+      p.PushStack(b)
+      p.PushStack(a)
       return
     } else {
-      p.PushStack(b % a)
+      v := int64(math.Abs(float64(b%a)))
+      if sgn {
+        p.PushStack(v * (-1))
+      } else {
+        p.PushStack(v)
+      }
     }
   }
 }
