@@ -24,9 +24,7 @@ func main() {
     defer exec.Command("stty", "-F", "/dev/tty", "echo").Run()
   }
 
-  if *debug {
-    pi.EnableDebug()
-  }
+  if *debug { pi.EnableDebug() }
 
   if *codelsize <= 0 {
     pi.SetCodelSize(1)
@@ -39,9 +37,7 @@ func main() {
   if err != nil {
     scanner := bufio.NewScanner(os.Stdin)
     var str string = ""
-    for scanner.Scan() {
-      str += scanner.Text()
-    }
+    for scanner.Scan() { str += scanner.Text() }
     altreader := strings.NewReader(str)
     pi.New(altreader)
   } else {

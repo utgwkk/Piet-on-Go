@@ -18,13 +18,9 @@ func (p *Piet) Run() {
       fmt.Printf("step %04d : %s ; DP=%s, CC=%s\n", i, p.now.ToString(), dpstat[p.DP], ccstat[BoolToInt64(!p.CC)])
     }
     cont = p.Step()
-    if p.debug {
-      fmt.Println(p.stack)
-    }
+    if p.debug { fmt.Println(p.stack) }
   }
-  if p.debug {
-    fmt.Println("Finished.")
-  }
+  if p.debug { fmt.Println("Finished.") }
 }
 
 var dr = [...]Point{Point{1, 0}, Point{0, 1}, Point{-1, 0}, Point{0, -1}}
@@ -67,9 +63,7 @@ func (p *Piet) Step() bool {
   for i := 0; i < 8; i++ {
     edge = p.GetEdge(sc)
     dest = AddPoints(edge, dr[p.DP])
-    if p.IsMovableCodel(dest){
-      break
-    }
+    if p.IsMovableCodel(dest){ break }
     if i % 2 == 0 {
       p.CC = !p.CC
     } else {
@@ -84,9 +78,7 @@ func (p *Piet) Step() bool {
   if p.GetCodel(p.now) != white && p.GetCodel(dest) != white {
     dh := (p.GetCodel(dest)/3 - p.GetCodel(p.now)/3 + 30) % 6
     dl := (p.GetCodel(dest) - p.GetCodel(p.now) + 30) % 3
-    if p.debug {
-      fmt.Println(commandsstr[dh][dl])
-    }
+    if p.debug { fmt.Println(commandsstr[dh][dl]) }
     commands[dh][dl]()
   }
   p.from = edge
@@ -98,21 +90,15 @@ func (p *Piet) GetEdge(sc []Point) Point {
   var rev bool = p.DP < 2
   var target bool = p.DP % 2 == 0
   sc = SortPointSlice(sc, target, rev)
-  if (p.DP % 2 == 0) == p.CC {
-    rev = !rev
-  }
+  if (p.DP % 2 == 0) == p.CC { rev = !rev }
 
   var r int = 1
 
   for ; r < len(sc); r++ {
     if target {
-      if sc[r].x != sc[0].x {
-        break
-      }
+      if sc[r].x != sc[0].x { break }
     } else {
-      if sc[r].y != sc[0].y {
-        break
-      }
+      if sc[r].y != sc[0].y { break }
     }
   }
   target = !target

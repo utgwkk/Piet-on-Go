@@ -7,17 +7,11 @@ type Point struct {
   y int
 }
 
-func AddPoints(a, b Point) Point {
-  return Point{a.x+b.x, a.y+b.y}
-}
+func AddPoints(a, b Point) Point { return Point{a.x+b.x, a.y+b.y} }
 
-func (p Point) Equal(q Point) bool {
-  return p.x == q.x && p.y == q.y
-}
+func (p Point) Equal(q Point) bool { return p.x == q.x && p.y == q.y }
 
-func (p Point) ToString() string {
-  return fmt.Sprintf("(%d, %d)", p.x, p.y)
-}
+func (p Point) ToString() string { return fmt.Sprintf("(%d, %d)", p.x, p.y) }
 
 func Lesser(p, q Point, b bool) bool {
   if b { // compare x

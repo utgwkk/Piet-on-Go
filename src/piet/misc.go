@@ -1,28 +1,15 @@
 package piet
 
-func any(l ...bool) bool {
-  for _, b := range l {
-    if b {
-      return true
-    }
-  }
-  return false
-}
-
 func all(l ...bool) bool {
   for _, b := range l {
-    if !b {
-      return false
-    }
+    if !b { return false }
   }
   return true
 }
 
 func contains(l []Point, t Point) bool {
   for _, p := range l {
-    if p.Equal(t) {
-      return true
-    }
+    if p.Equal(t) { return true }
   }
   return false
 }

@@ -22,19 +22,13 @@ type Piet struct {
   output string
 }
 
-func (p *Piet) SetCodelSize(size int) {
-  p.codelsize = size
-}
+func (p *Piet) SetCodelSize(size int) { p.codelsize = size }
 
-func (p *Piet) EnableDebug() {
-  p.debug = true
-}
+func (p *Piet) EnableDebug() { p.debug = true }
 
 func (p *Piet) New(reader io.Reader) error {
   m, _, err := image.Decode(reader)
-  if err != nil {
-    return err
-  }
+  if err != nil { return err }
   bounds := m.Bounds()
 
   p.codel = make([][]int, bounds.Max.Y - bounds.Min.Y)
