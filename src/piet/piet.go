@@ -20,9 +20,24 @@ type Piet struct {
   now Point
   debug bool
   output string
+  execlimit int
 }
 
-func (p *Piet) SetCodelSize(size int) { p.codelsize = size }
+func (p *Piet) SetCodelSize(size int) {
+  if size <= 0 {
+    p.codelsize = 1
+  } else {
+    p.codelsize = size
+  }
+}
+
+func (p *Piet) SetExecLimit(limit int) {
+  if limit < 0 {
+    p.execlimit = 100000
+  } else {
+    p.execlimit = limit
+  }
+}
 
 func (p *Piet) EnableDebug() { p.debug = true }
 

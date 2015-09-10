@@ -14,7 +14,8 @@ func main() {
   var pi piet.Piet
   var fname = flag.String("i", "filename", "source code file name")
   var debug = flag.Bool("debug", false, "if true, enables debug mode")
-  var codelsize= flag.Int("codel", 1, "codel size of input")
+  var codelsize = flag.Int("codel", 1, "codel size of input")
+  var limit = flag.Int("e", 100000, "the number of execution steps")
   flag.Parse()
 
   if os.DevNull == "/dev/null" { // UNIX
@@ -25,12 +26,8 @@ func main() {
   }
 
   if *debug { pi.EnableDebug() }
-
-  if *codelsize <= 0 {
-    pi.SetCodelSize(1)
-  } else {
-    pi.SetCodelSize(*codelsize)
-  }
+  pi.SetCodelSize(*codelsize)
+  pi.SetExecLimit(*limit)
 
   reader, err := os.Open(*fname)
 

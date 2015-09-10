@@ -13,7 +13,7 @@ func (p *Piet) Run() {
   var cont bool = true
   var dpstat = []string{"RIGHT", "DOWN", "LEFT", "UP"}
   var ccstat = []string{"LEFT", "RIGHT"}
-  for i := 1; cont; i++ {
+  for i := 0; i < p.execlimit && cont; i++ {
     if p.debug {
       fmt.Printf("step %04d : %s ; COLOR=%s, DP=%s, CC=%s\n", i, p.now.ToString(), colorname[p.GetCodel(p.now)], dpstat[p.DP], ccstat[BoolToInt64(!p.CC)])
     }
