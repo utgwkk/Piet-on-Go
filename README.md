@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/utgw/Piet-on-Go.svg?branch=master)](https://travis-ci.org/utgw/Piet-on-Go)
+
 # Piet-on-Go
 A Piet interpreter written in Go
 
