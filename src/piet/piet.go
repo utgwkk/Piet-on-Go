@@ -78,3 +78,7 @@ func (p *Piet) GetCodel(point Point) int {
 		return black
 	}
 }
+
+func (p *Piet) GetOutput() string {
+  return p.output
+}
