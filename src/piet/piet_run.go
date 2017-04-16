@@ -75,17 +75,18 @@ func (p *Piet) Step() bool {
 	for i := 0; i < 8; i++ {
 		edge = p.GetEdge(sc)
 		dest = AddPoints(edge, dr[p.DP])
+		if p.IsMovableCodel(dest) {
+			break
+		}
 		if i == 7 {
 			// end of the program
 			return false
-		}
-		if p.IsMovableCodel(dest) {
-			break
 		}
 		if i%2 == 0 {
 			p.CC = !p.CC
 		} else {
 			p.DP = (p.DP + 1) % 4
+			p.CC = !p.CC
 		}
 	}
 
